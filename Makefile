@@ -1,3 +1,9 @@
+#####################################################
+# Microchip PIC Makefile boilerplate.               #
+#                                                   #
+# Author: Nathan Campos <nathan@innoveworkshop.com> #
+#####################################################
+
 # Project definitions.
 NAME = blink
 DEVICE = 12F683
