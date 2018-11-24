@@ -8,7 +8,7 @@
 NAME = blink
 DEVICE = 12F683
 PROJECT = $(NAME)-$(DEVICE)
-SRC = blink.c
+SRC = main.c
 
 # Paths to MPLAB X and the XC compiler.
 MPLABDIR = "/opt/microchip/mplabx/v5.10/mplab_platform/bin"
