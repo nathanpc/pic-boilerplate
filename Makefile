@@ -10,18 +10,24 @@ DEVICE = 12F683
 PROJECT = $(NAME)-$(DEVICE)
 SRC = main.c
 
+# IPE flags. (For more information run "make ipe_help")
+TOOL = PPK3
+IPEFLAGS = -W
+
 # Paths to MPLAB X and the XC compiler.
-MPLABDIR = "/opt/microchip/mplabx/v5.10/mplab_platform/bin"
-MPCCDIR = "/opt/microchip/xc8/v2.00"
+MPLABDIR = /opt/microchip/mplabx/v5.10/mplab_platform/bin
+IPEDIR = /opt/microchip/mplabx/v5.10/mplab_platform/mplab_ipe
+MPCCDIR = /opt/microchip/xc8/v2.00
 
 # Program definitions.
+CC = xc8-cc
 RM = rm -f
 MV = mv
 MKDIR = mkdir -p
-CC = xc8-cc
 FIXDEPS = $(MPLABDIR)/fixDeps
+IPE = java -jar $(IPEDIR)/ipecmd.jar
 
-# Compilers and flags.
+# Compiler flags.
 CFLAGS = $(MPLAB_CFLAGS)
 LDFLAGS = $(MPLAB_LDFLAGS)
 OBJ = $(patsubst %.c,$(OBJDIR)/%.p1,$(SRC))
@@ -51,16 +57,37 @@ $(DISTDIR)/$(PROJECT).hex: $(OBJ)
 clean:
 	$(RM) -r $(OBJDIR)/
 	$(RM) -r $(DISTDIR)/
+	$(RM) log.0 MPLABXLog.xml
 
-#write:
-#	$(PK2) -M -F$(PROJECT).hex
-#
-#on:
-#	$(PK2) -T
-#
-#off:
-#	$(PK2) -W
-#
-#erase:
-#	$(PK2) -E
+write:
+	-$(IPE) -M -P$(DEVICE) -T$(TOOL) $(IPEFLAGS) -F"$(DISTDIR)/$(PROJECT).hex"
+	$(RM) log.0 MPLABXLog.xml
+
+erase:
+	-$(IPE) -E -P$(DEVICE) -T$(TOOL) $(IPEFLAGS)
+	$(RM) log.0 MPLABXLog.xml
+
+verify:
+	-$(IPE) -Y -P$(DEVICE) -T$(TOOL) $(IPEFLAGS)
+	$(RM) log.0 MPLABXLog.xml
+
+blank_check:
+	-$(IPE) -C -P$(DEVICE) -T$(TOOL) $(IPEFLAGS)
+	$(RM) log.0 MPLABXLog.xml
+
+id:
+	-$(IPE) -I -P$(DEVICE) -T$(TOOL) $(IPEFLAGS)
+	$(RM) log.0 MPLABXLog.xml
+
+on:
+	-$(IPE) -W -P$(DEVICE) -T$(TOOL) $(IPEFLAGS)
+	$(RM) log.0 MPLABXLog.xml
+
+off:
+	-$(IPE) -P$(DEVICE) -T$(TOOL)
+	$(RM) log.0 MPLABXLog.xml
+
+ipe_help:
+	-$(IPE) -?
+	$(RM) log.0 MPLABXLog.xml
 

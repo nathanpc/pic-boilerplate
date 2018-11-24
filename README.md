@@ -10,7 +10,9 @@ Feel free to use this for your own projects and contribute to make this boilerpl
 Sadly Microchip has made our lives very difficult and you still need to have the full MPLAB X IDE installed in order to properly compile and upload your code to their microcontrollers, so because of this you'll have to go into the `Makefile` and set the following variables according to your setup:
 
   - `MPLABDIR`: Location of the MPLAB X binaries.
+  - `IPEDIR`: Location of the `ipecmd.jar` file.
   - `MPCCDIR`: Root of the XC compiler directory (NOT THE BINARIES).
+  - `CC`: Compiler command.
 
 Also this `Makefile` is setup so that everything is well organized, so it'll automatically use the following directories inside your project:
 
@@ -24,6 +26,8 @@ Whenever you start a new project with this boilerplate make sure to also set the
   - `DEVICE`: Device name without the "PIC" prefix. (eg. PIC12F683 should be 12F683)
   - `PROJECT` (Optional): Name the HEX file will have.
   - `SRC`: Source file names.
+  - `TOOL`: Programmer tool name. (run `make ipe_help` for more information)
+  - `IPEFLAGS`: Additional flags to be used. For example `-W` for powering the target. (run `make ipe_help` for more information)
 
 
 ## License
