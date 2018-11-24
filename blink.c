@@ -1,4 +1,4 @@
-#include <pic.h>
+#include <xc.h>
 #include <pic12f683.h>
 
 #define _XTAL_FREQ 4000000
