@@ -5,7 +5,7 @@ This repository aims to create a boilerplate for Microchip PIC projects that are
 Feel free to use this for your own projects and contribute to make this boilerplate even better.
 
 
-## Some Details
+## Important Information
 
 Sadly Microchip has made our lives very difficult and you still need to have the full MPLAB X IDE installed in order to properly compile and upload your code to their microcontrollers, so because of this you'll have to go into the `Makefile` and set the following variables according to your setup:
 
